@@ -1,1 +1,45 @@
-안녕하세요
+<html>
+  
+  
+<head>
+</head>
+<body>
+  
+<div Id = "timeText">
+
+00:00.00
+
+</div>
+<input Id="startButton" type = "button" value = "start"/>
+<input Id="stopButton" type = "button" value = "stop"/>
+  
+  
+<script>
+  
+var inputElement = document.getElementById("startButton");
+var inputElement2 = document.getElementById("stopButton");
+var timeTextElement = document.getElementById("timeText");
+
+var starttime = null;
+var timerId = null;
+
+inputElement.addEventListener("click", function(){
+
+	starttime = Date.now();
+	if(timerId != null){
+		return;
+ 	}
+	timerId = setInterval(function(){
+		timeTextElement.innerHTML = ((Date.now() - starttime)/1000).toFixed(2)
+	})
+});
+
+inputElement2.addEventListener("click", function(){
+clearInterval(timerId);
+timerId = null;
+})
+
+</script>
+  
+</body>
+</html>
