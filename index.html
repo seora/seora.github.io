@@ -15,21 +15,25 @@
 00:00.00
 
 </div>
-<input Id="startButton" type = "button" value = "start"/>
-<input Id="stopButton" type = "button" value = "stop"/>
-  
+<input Id="시작Button" type = "button" value = "시작"/>
+<input Id="랩Button" type = "button" value = "랩"/>
+
+<ol id = "labs">
+</ol>
   
 <script>
   
-var inputElement = document.getElementById("startButton");
-var inputElement2 = document.getElementById("stopButton");
+var inputElement = document.getElementById("시작Button");
+var inputElement2 = document.getElementById("랩Button");
 var timeTextElement = document.getElementById("timeText");
-
+var orderedListElement = document.getElementById("labs")
 var starttime = null;
 var timerId = null;
 
-inputElement.addEventListener("click", function(){
 
+
+
+inputElement.addEventListener("click", function(){
 	starttime = Date.now();
 	if(timerId != null){
 		return;
@@ -37,12 +41,17 @@ inputElement.addEventListener("click", function(){
 	timerId = setInterval(function(){
 		timeTextElement.innerHTML = ((Date.now() - starttime)/1000).toFixed(2)
 	})
+  
 });
-
 inputElement2.addEventListener("click", function(){
 clearInterval(timerId);
 timerId = null;
+
+
+timeTextElement.innerHTML = ((Date.now()-starttime)/1000).toFixed(2);
+
 })
+
 
 </script>
   
