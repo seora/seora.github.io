@@ -31,26 +31,30 @@ var starttime = null;
 var timerId = null;
 
 
-
-
 inputElement.addEventListener("click", function(){
-	starttime = Date.now();
-	if(timerId != null){
-		return;
- 	}
-	timerId = setInterval(function(){
-		timeTextElement.innerHTML = ((Date.now() - starttime)/1000).toFixed(2)
-	})
-  
-});
-inputElement2.addEventListener("click", function(){
-clearInterval(timerId);
-timerId = null;
+      starttime = Date.now();
+      if(timerId != null){
+        return;
+      }
+      timerId = setInterval(function(){
+   var seconds = (Date.now() - starttime) / 1000;
+   var minutes = Math.floor(seconds/60);
+   seconds = (seconds - minutes * 60).toFixed(2);
+        timeTextElement.innerHTML = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+      })
+    });
 
+    inputElement2.addEventListener("click", function(){
+      clearInterval(timerId);
+      timerId = null;
+    })
 
-timeTextElement.innerHTML = ((Date.now()-starttime)/1000).toFixed(2);
+    recordButtonElement.addEventListener("click", function () {
+      var newItem = document.createElement("li");
+       newItem.innerHTML = timeTextElement.innerHTML;
+      labs.append(newItem);
+    })
 
-})
 
 
 </script>
